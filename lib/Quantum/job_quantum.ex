@@ -29,7 +29,7 @@ defmodule JobQuantum do
   """
   def insert_data() do
     create_accounts(%{type_document: "CC",
-                      num_document: 1113519071,
+                      num_document: 1113519072,
                       email: "mlceballos@personalsoft.com.co",
                       name_company: "personalsoft",
                       name: "Milthon",

@@ -13,10 +13,10 @@ config :curso_elixir_db,
 # Configures the endpoint
 config :curso_elixir_db, CursoElixirDbWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "+wJoDillDuFcueXxE7A1TiCkU4sZYBjXnzoPbNMrNkLwLz4zMh9C4iPGML3dU7hu",
+  secret_key_base: "v9LF0maxHknrKfbDkec9210N+99tAWx+AVzrFgcCMO+Aqxmjc//0O0HB+7TN25tB",
   render_errors: [view: CursoElixirDbWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: CursoElixirDb.PubSub,
-  live_view: [signing_salt: "twgw5iQy"]
+  live_view: [signing_salt: "qf8EzgXA"]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -29,24 +29,3 @@ config :phoenix, :json_library, Jason
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
-
-config :logger, level: :debug
-
-config :curso_elixir_db, CursoElixirDb.Scheduler,
-  jobs: [
-    # application_task: [
-    #   schedule: {:extended, "* * * * *"},
-    #   task: {JobQuantum, :print_text, ["tmp/increment.txt", "Hola "]}
-    # ],
-    # application_task_insert: [
-    #   schedule: {:extended, "*/3 * * * *"},
-    #   task: {JobQuantum, :insert_data, []}
-    # ],
-
-    application_scraping: [
-      schedule: {:extended, "*/5 * * * *"},
-      task: {Scrap, :do_get, []}
-    ]
- ]
-
-#  config :floki, :html_parser, Floki.HTMLParser.Html5ever

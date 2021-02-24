@@ -3,8 +3,8 @@ defmodule CursoElixirDb.Repo.Migrations.CrearUnaTablaScrap do
 
   def change do
     create table(:scraping) do
-      add :tittle, :string
-      add :descripcion, :string
+      add :title, :string
+      add :desc, :string
       add :score, :string
       add :growth, :string
 

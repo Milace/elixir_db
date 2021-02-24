@@ -9,43 +9,48 @@ defmodule CursoElixirDb.HelperScraping do
   alias CursoElixirDb.HelperScraping.Scraping
 
   @doc """
-  Returns the list of accounts.
+  Returns the list of scraps.
 
   ## Examples
 
-      iex> list_accounts()
-      [%Accounts{}, ...]
+      iex> list_scrap()
+      [%scrap{}, ...]
 
   """
   def list_scrap do
     Repo.all(Scraping)
   end
 
-  @doc """
-  Gets a single accounts.
+  def find_scrap_by_title(title) do
+    from(s in Scraping, where: s.title == ^title)
+    |> Repo.one
+  end
 
-  Raises `Ecto.NoResultsError` if the Accounts does not exist.
+  @doc """
+  Gets a single scraps.
+
+  Raises `Ecto.NoResultsError` if the scrap does not exist.
 
   ## Examples
 
-      iex> get_accounts!(123)
-      %Accounts{}
+      iex> get_scrap!(123)
+      %Scraping{}
 
-      iex> get_accounts!(456)
+      iex> get_scraps!(456)
       ** (Ecto.NoResultsError)
 
   """
   def get_scrap!(id), do: Repo.get!(Scraping, id)
 
   @doc """
-  Creates a accounts.
+  Creates a scraps.
 
   ## Examples
 
-      iex> create_accounts(%{field: value})
-      {:ok, %Accounts{}}
+      iex> create_scraps(%{field: value})
+      {:ok, %Scraping{}}
 
-      iex> create_accounts(%{field: bad_value})
+      iex> create_scraps(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
@@ -56,32 +61,32 @@ defmodule CursoElixirDb.HelperScraping do
   end
 
   @doc """
-  Updates a accounts.
+  Updates a scraps.
 
   ## Examples
 
-      iex> update_accounts(accounts, %{field: new_value})
-      {:ok, %Accounts{}}
+      iex> update_scrap(scraps, %{field: new_value})
+      {:ok, %Scraping{}}
 
-      iex> update_accounts(accounts, %{field: bad_value})
+      iex> update_scraps(scraps, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
   def update_scrap(%Scraping{} = scrap, attrs) do
     scrap
-    |> Scraping.changeset(attrs)
+    |> Scraping.changeset_update(attrs)
     |> Repo.update()
   end
 
   @doc """
-  Deletes a accounts.
+  Deletes a scraps.
 
   ## Examples
 
-      iex> delete_accounts(accounts)
-      {:ok, %Accounts{}}
+      iex> delete_scrapt(accounts)
+      {:ok, %Scraping{}}
 
-      iex> delete_accounts(accounts)
+      iex> delete_scraps(scraps)
       {:error, %Ecto.Changeset{}}
 
   """
@@ -90,12 +95,12 @@ defmodule CursoElixirDb.HelperScraping do
   end
 
   @doc """
-  Returns an `%Ecto.Changeset{}` for tracking accounts changes.
+  Returns an `%Ecto.Changeset{}` for tracking scraps changes.
 
   ## Examples
 
       iex> change_scrap(scrap)
-      %Ecto.Changeset{data: %Accounts{}}
+      %Ecto.Changeset{data: %Scraping{}}
 
   """
   def change_scrap(%Scraping{} = scrap, attrs \\ %{}) do

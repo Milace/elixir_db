@@ -3,8 +3,8 @@ defmodule CursoElixirDb.HelperScraping.Scraping do
   import Ecto.Changeset
 
   schema "scraping" do
-    field :tittle, :string
-    field :descripcion, :string
+    field :title, :string
+    field :desc, :string
     field :score, :string
     field :growth, :string
     timestamps()
@@ -13,7 +13,13 @@ defmodule CursoElixirDb.HelperScraping.Scraping do
   @doc false
   def changeset(scraping, attrs) do
     scraping
-    |> cast(attrs, [:tittle, :descripcion, :score, :growth])
-    |> validate_required([:tittle, :descripcion, :score, :growth])
+    |> cast(attrs, [:title, :desc, :score, :growth])
+    |> validate_required([:title, :desc])
+  end
+
+  def changeset_update(scraping, attrs) do
+    scraping
+    |> cast(attrs, [:score, :growth])
+    # |> validate_required([:score, :growth])
   end
 end

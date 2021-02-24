@@ -1,6 +1,7 @@
 defmodule Scrap do
   import CursoElixirDb.HelperScraping
   alias Poison
+  alias CursoElixirDb.HelperScraping.Scraping
 
   @url "https://explodingtopics.com/"
 
@@ -16,33 +17,25 @@ defmodule Scrap do
   end
 
   def find({:ok, document}) do
-    titles = for{_,_,[titles]} <- document |> Floki.find(".gridContainer") |> Floki.find(".topicInfoContainer") |> Floki.find(".tileKeyword"), do: titles
-    descriptions = for{_,_,[descriptions]} <- document |> Floki.find(".gridContainer") |> Floki.find(".topicInfoContainer") |> Floki.find(".tileDescription"), do: descriptions
-    score = for{_,_,[score]} <- document |> Floki.find(".gridContainer") |> Floki.find(".topicInfoContainer") |> Floki.find(".scoreTagItem"), do: score
-    growth = for{_,_,[growth]} <- document |> Floki.find(".gridContainer") |> Floki.find(".topicInfoContainer") |> Floki.find(".scoreTagGradient"), do: growth
+    container = document |> Floki.find(".topicInfoContainer")
 
-    list = create_list(titles, descriptions, score, growth)
-    titles |> Enum.zip(list) |> Enum.into(%{}) |> insert_data
+    titles = for{_,_,[titles]} <- container |> Floki.find(".tileKeyword"), do: titles
+    descriptions = for{_,_,[descriptions]} <- container |> Floki.find(".tileDescription"), do: descriptions
+    score = for{_,_,[score]} <- container |> Floki.find("div.scoreTagItem"), do: score
+    growth = for{_,_,[growth]} <- container |> Floki.find("div.scoreTagItem.scoreTagGradient"), do: growth
+
+    [titles, descriptions, score, growth] |> Enum.zip |> insert_or_update
   end
 
   @doc """
-   Inserta datos en la base de datos
+   Insert data in data base
   """
-  def insert_data(data) do
-    for {_, x} <- data do
-      create_scrap(%{tittle: Enum.at(x, 0),
-                      descripcion: Enum.at(x, 1),
-                      score: Enum.at(x, 2),
-                      growth: Enum.at(x, 3)
-                    })
-    end
-  end
-
-  def create_list(t, d, s, g, acum \\ [])
-
-  def create_list([], _d, _s, _g, acum), do: acum
-
-  def create_list(t, d, s, g, acum) do
-    create_list(tl(t), tl(d), tl(s), tl(g),  acum ++ [[hd(t), hd(d), hd(s), hd(g)]])
+  def insert_or_update(list) do
+    Enum.map(list, fn {title, desc, score, growth} ->
+      case find_scrap_by_title(title) do
+         %Scraping{} = scrap -> update_scrap(scrap, %{score: score, growth: growth})
+          _ -> create_scrap(%{title: title, desc: desc, score: score, growth: growth})
+      end
+    end)
   end
 end

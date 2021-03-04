@@ -19,7 +19,10 @@ defmodule CursoElixirDb.Application do
       # {CursoElixirDb.Worker, arg}
 
       #Cron Job with Quantum
-      CursoElixirDb.Scheduler
+      CursoElixirDb.Scheduler,
+
+      #Use GenServer
+      {CursoElixirDb.Registry, name: CursoElixirDb.Registry}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

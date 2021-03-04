@@ -17,12 +17,22 @@ defmodule CursoElixirDb.MixProject do
   # Configuration for the OTP application.
   #
   # Type `mix help compile.app` for more information.
+  # def application do
+  #   [
+  #     mod: {CursoElixirDb.Application, []},
+  #     extra_applications: [:logger, :runtime_tools]
+  #   ]
+  # end
+
   def application do
-    [
-      mod: {CursoElixirDb.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+    [ mod: {CursoElixirDb.Application, []},
+      extra_applications: applications(Mix.env)
     ]
   end
+
+  defp applications(:test), do: [:logger, :runtime_tools, :postgrex]
+  defp applications(_), do: [:logger, :runtime_tools]
+
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
@@ -49,8 +59,8 @@ defmodule CursoElixirDb.MixProject do
       {:httpoison, "~> 1.7"},
       {:quantum, "~> 3.0"},
       {:timex, "~> 3.0"},
-      {:floki, "~> 0.30.0"}
-      # {:html5ever, "~> 0.8.0"}
+      {:floki, "~> 0.30.0"},
+      {:phoenix_live_view, "~> 0.15.4"},
     ]
   end
 

@@ -44,9 +44,12 @@ config :curso_elixir_db, CursoElixirDb.Scheduler,
     # ],
 
     application_scraping: [
-      schedule: {:extended, "*/5 * * * *"},
+      schedule: {:extended, "*/20 * * * *"},
       task: {Scrap, :do_get, []}
     ]
  ]
+
+ config :curso_elixir_db, CursoElixirDb.Endpoint,
+   live_view: [signing_salt: "8i1D6nZCH6l4oiQ2mZaxYDYzKt1toIy6"]
 
 #  config :floki, :html_parser, Floki.HTMLParser.Html5ever

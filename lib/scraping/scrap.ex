@@ -24,7 +24,8 @@ defmodule Scrap do
     score = for{_,_,[score]} <- container |> Floki.find("div.scoreTagItem"), do: score
     growth = for{_,_,[growth]} <- container |> Floki.find("div.scoreTagItem.scoreTagGradient"), do: growth
 
-    [titles, descriptions, score, growth] |> Enum.zip |> insert_or_update
+    [titles, descriptions, score, growth] |> Enum.zip |> insert_or_update(CursoElixirDb.Registry) # Insert normal
+    # [titles, descriptions, score, growth] |> Enum.zip |> insert_or_update # Insert normal
   end
 
   @doc """
@@ -37,5 +38,12 @@ defmodule Scrap do
           _ -> create_scrap(%{title: title, desc: desc, score: score, growth: growth})
       end
     end)
+  end
+
+  @doc """
+   Insert data base using GenServer
+  """
+  def insert_or_update(list, server) do
+    server |> CursoElixirDb.Registry.create(list)
   end
 end

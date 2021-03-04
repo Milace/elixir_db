@@ -1,0 +1,24 @@
+  <table>
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Descripcion</th>
+      <th>score</th>
+      <th>growth</th>
+
+
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <%= for card <- @cards do %>
+    <tr>
+      <td><%= card.title %></td>
+      <td><%= card.desc %></td>
+      <td><%= card.score %></td>
+      <td><%= card.growth %></td>
+      <td><button phx-click="delete" phx-value-id="<%= card.id %>">Delete</button></td>
+    </tr>
+    <% end %>
+    </tbody>
+    </table>

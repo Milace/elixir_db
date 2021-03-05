@@ -11,6 +11,7 @@ use Mix.Config
 # before starting your production server.
 config :curso_elixir_db, CursoElixirDbWeb.Endpoint,
   url: [host: "localhost", port: 4000],
+  check_origin: ["//localhost", "//64.225.4.18"],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production

@@ -1,7 +1,5 @@
 defmodule CursoElixirDbWeb.Router do
   use CursoElixirDbWeb, :router
-  use Phoenix.Router
-  import Phoenix.LiveView.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -23,6 +21,8 @@ defmodule CursoElixirDbWeb.Router do
     get "/", PageController, :index
 
     live "/cards", LivesController
+
+    resources "/accounts", AccountsController
   end
 
   # Other scopes may use custom stacks.

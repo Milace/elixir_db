@@ -8,7 +8,7 @@ networks:
 
 services:
   app:
-    image: curso_elixir_db:0.1.0
+    image: milace/curso_elixir_db:0.1.0
     ports:
       - "80:4000"
     env_file:

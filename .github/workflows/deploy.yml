@@ -8,7 +8,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-18.04
-    name: mix test
+    name: mix test deploy
     services:
       db:
         env:

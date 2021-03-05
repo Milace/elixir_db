@@ -14,6 +14,7 @@ config :curso_elixir_db, CursoElixirDbWeb.Endpoint,
   check_origin: ["//localhost", "//64.225.4.18"],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
+
 # Do not print debug messages in production
 config :logger, level: :info
 

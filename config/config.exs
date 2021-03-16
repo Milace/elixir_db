@@ -43,10 +43,10 @@ config :curso_elixir_db, CursoElixirDb.Scheduler,
     #   task: {JobQuantum, :insert_data, []}
     # ],
 
-    application_scraping: [
-      schedule: {:extended, "*/20 * * * *"},
-      task: {Scrap, :do_get, []}
-    ]
+    # application_scraping: [
+    #   schedule: {:extended, "*/20 * * * *"},
+    #   task: {Scrap, :do_get, []}
+    # ]
  ]
 
  config :curso_elixir_db, CursoElixirDb.Endpoint,

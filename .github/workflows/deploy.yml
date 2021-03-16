@@ -13,7 +13,7 @@ jobs:
       db:
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: 123
+          POSTGRES_PASSWORD: postgres
           POSTGRES_DB: postgres
         image: postgres:11
         ports: ['5432:5432']
@@ -40,7 +40,7 @@ jobs:
     - name: Publish to DockerHub
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
-        name: jufernando18/curso_elixir_db:${{ github.sha }}
+        name: milace/curso_elixir_db:${{ github.sha }}
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
   deploy:
@@ -54,4 +54,4 @@ jobs:
         host: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
         KEY: ${{ secrets.SSHKEY }}
-        script: docker service update --image jufernando18/curso_elixir_db:${{ github.sha }} curso_elixir_db_app
+        script: docker service update --image milace/curso_elixir_db:${{ github.sha }} curso_elixir_db_app
